@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: iperf
+  name: iperf
+  namespace: iperf
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: iperf
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: iperf
+    spec:
+      containers:
+      - name: iperf
+        image: inercia/iperf
+        command: ['/usr/bin/iperf', '-s', '-p5001']
+        ports:
+        - containerPort: 5001
+          name: iperf
+          protocol: TCP
