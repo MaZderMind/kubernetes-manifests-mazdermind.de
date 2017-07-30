@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+  namespace: osm-replicate-sequences
+spec:
+  ports:
+    - name: web
+      port: 80
+      protocol: TCP
+  selector:
+    app: webapp
