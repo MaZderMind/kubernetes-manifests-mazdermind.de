@@ -2,16 +2,16 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   labels:
-    app: webapp
-  name: webapp
+    app: redirector
+  name: redirector
   namespace: osm-replicate-sequences
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: replicate-sequences.osm.kube.mazdermind.de
+  - host: osm.kube.mazdermind.de
     http:
       paths:
       - backend:
-          serviceName: webapp
+          serviceName: redirector
           servicePort: web
