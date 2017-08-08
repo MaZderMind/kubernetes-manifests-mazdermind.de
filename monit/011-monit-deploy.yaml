@@ -20,13 +20,16 @@ spec:
     spec:
       containers:
       - name: monit
-        image: mazdermind/alpine-monit:reload-on-config-change
+        image: mazdermind/alpine-monit:latest
         env:
           - name: MONIT_PORT
             value: "2812"
 
           - name: MONIT_ALLOW
             value: "0.0.0.0/0"
+
+          - name: MONIT_RELOAD
+            value: "true"
 
 
         volumeMounts:
