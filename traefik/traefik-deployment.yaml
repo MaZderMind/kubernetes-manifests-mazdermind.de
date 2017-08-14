@@ -25,3 +25,20 @@ spec:
         args:
         - --web
         - --kubernetes
+        - --configfile=/config/traefik.toml
+
+        volumeMounts:
+        - mountPath: /config
+          name: config
+
+        - mountPath: /etc/traefik/acme/
+          name: traefic-acme-store
+
+      volumes:
+      - name: config
+        configMap:
+          name: traefik-conf
+
+      - name: traefic-acme-store
+        persistentVolumeClaim:
+          claimName: traefic-acme-store
