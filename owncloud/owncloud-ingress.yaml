@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: www
+  name: www
+  namespace: owncloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: oc.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: owncloud
+          servicePort: www

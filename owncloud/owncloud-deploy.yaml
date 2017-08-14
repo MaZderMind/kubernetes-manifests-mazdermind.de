@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: owncloud
+  name: owncloud
+  namespace: owncloud
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: owncloud
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: owncloud
+    spec:
+      containers:
+      - name: app
+        image: owncloud:9.1
+
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: data
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: data
