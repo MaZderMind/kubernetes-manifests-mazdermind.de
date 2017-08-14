@@ -18,11 +18,8 @@ spec:
       labels:
         app: iperf
     spec:
+      hostNetwork: true
       containers:
       - name: iperf
         image: inercia/iperf
-        command: ['/usr/bin/iperf', '-s', '-p5001']
-        ports:
-        - containerPort: 5001
-          name: iperf
-          protocol: TCP
+        command: ['/usr/bin/iperf', '-Vs', '-p5001']
