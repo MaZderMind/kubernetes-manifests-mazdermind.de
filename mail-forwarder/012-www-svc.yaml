@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: forwarder
+  labels:
+    app: forwarder
+  namespace: mail-forwarder
+spec:
+  ports:
+    - name: forwarder
+      port: 25
+      protocol: TCP
+  selector:
+    app: forwarder
