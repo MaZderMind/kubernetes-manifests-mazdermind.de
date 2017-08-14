@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: www
+  name: www
+  namespace: www-htdus
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: www
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: www
+    spec:
+      containers:
+      - name: www
+        image: mazdermind/php-apache
+
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: www
+
+      volumes:
+      - name: www
+        persistentVolumeClaim:
+          claimName: www
