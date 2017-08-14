@@ -4,7 +4,7 @@ metadata:
   labels:
     app: redirector
   name: redirector
-  namespace: osm-replicate-sequences
+  namespace: www
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:

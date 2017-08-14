@@ -15,10 +15,3 @@ spec:
       - backend:
           serviceName: www
           servicePort: www
-
-  - host: www.mazdermind.de
-    http:
-      paths:
-      - backend:
-          serviceName: www
-          servicePort: www
