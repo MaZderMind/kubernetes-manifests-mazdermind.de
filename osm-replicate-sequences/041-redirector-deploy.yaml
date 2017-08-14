@@ -24,7 +24,7 @@ spec:
 
         env:
         - name: REDIRECT_000_OLD_LOCATION
-          value: /replicate-sequences:https://replicate-sequences.osm.kube.mazdermind.de/
+          value: /replicate-sequences:https://replicate-sequences.osm.mazdermind.de/
 
         - name: REDIRECT_001_ROOT
-          value: /:https://replicate-sequences.osm.kube.mazdermind.de/
+          value: /:https://replicate-sequences.osm.mazdermind.de/

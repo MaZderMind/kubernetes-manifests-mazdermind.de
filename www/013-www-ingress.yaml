@@ -9,14 +9,14 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: kube.mazdermind.de
+  - host: mazdermind.de
     http:
       paths:
       - backend:
           serviceName: www
           servicePort: www
 
-  - host: www.kube.mazdermind.de
+  - host: www.mazdermind.de
     http:
       paths:
       - backend:

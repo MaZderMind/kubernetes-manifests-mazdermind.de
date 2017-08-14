@@ -9,7 +9,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: c3voc.kube.mazdermind.de
+  - host: c3voc.mazdermind.de
     http:
       paths:
       - backend:

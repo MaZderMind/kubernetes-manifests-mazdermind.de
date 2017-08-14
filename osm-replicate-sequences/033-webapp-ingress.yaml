@@ -9,7 +9,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: replicate-sequences.osm.kube.mazdermind.de
+  - host: replicate-sequences.osm.mazdermind.de
     http:
       paths:
       - backend:
