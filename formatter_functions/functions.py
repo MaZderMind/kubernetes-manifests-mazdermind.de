@@ -1,15 +1,25 @@
 import os
 import base64
 import getpass
+import bcrypt
+import hashlib
 
 from pykeepass import PyKeePass
 
 password = None
 filename = None
 
+def _encrypt_passwd(passwd):
+	passwd_ascii = passwd.encode('ascii')
+	salt = salt = "$2a$06$" + hashlib.sha1(passwd_ascii).hexdigest()[0:22] + "$"
+	return bcrypt.hashpw(passwd_ascii, salt.encode('ascii')).decode('ascii')
+
 def htpasswd_filter(logins):
-	login_str = map(lambda login: login.username+':'+login.password, logins)
-	return list(login_str)
+	login_lines = map(
+		lambda login: login.username+':'+_encrypt_passwd(login.password),
+		logins)
+
+	return '\n'.join(login_lines)
 
 def base64_filter(string):
 	return base64.standard_b64encode(string.encode('ascii')).decode('ascii')
