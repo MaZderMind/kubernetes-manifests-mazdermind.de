@@ -1,4 +1,5 @@
 *secrets.yaml
 /venv
 /output
+/.keepass-file
 __pycache__
