@@ -64,7 +64,6 @@ def keepass_filter(path, attribute):
 def keepass_group_filter(path):
 	keepass = _open_keepass()
 	group = keepass.find_groups_by_path('/'.join(path), first=True)
-	print(group)
 
 	if not group:
 		raise RuntimeError('Unable to find group in Keepass-File: '+str(path))
