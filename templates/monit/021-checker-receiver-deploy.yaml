@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: check-receiver
+  name: check-receiver
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: check-receiver
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: check-receiver
+    spec:
+      containers:
+      - name: check-receiver
+        image: mazdermind/check-receiver
+
+        volumeMounts:
+        - mountPath: /var/check-receiver/status-files/
+          name: monit-state
+
+        volumeMounts:
+        - mountPath: /state
+          name: monit-state
+
+      volumes:
+      - name: monit-state
+        persistentVolumeClaim:
+          claimName: monit-state

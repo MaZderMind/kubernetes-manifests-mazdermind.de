@@ -1,15 +1,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: monit
+  name: check-receiver
   labels:
-    app: monit
+    app: check-receiver
   namespace: {{ namespace }}
 spec:
   ports:
-    - name: monit
-      port: 2812
+    - name: check-receiver
+      port: 8080
       protocol: TCP
 
   selector:
-    app: monit
+    app: check-receiver

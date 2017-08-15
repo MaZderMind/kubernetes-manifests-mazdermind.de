@@ -39,13 +39,6 @@ spec:
         - mountPath: /state
           name: monit-state
 
-      - name: check-receiver
-        image: mazdermind/check-receiver
-
-        volumeMounts:
-        - mountPath: /var/check-receiver/status-files/
-          name: monit-state
-
       volumes:
       - name: monit-state
         persistentVolumeClaim:

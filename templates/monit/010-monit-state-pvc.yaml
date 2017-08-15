@@ -4,7 +4,7 @@ metadata:
   name: monit-state
   namespace: {{ namespace }}
 spec:
-  accessModes: [ "ReadWriteOnce" ]
+  accessModes: [ "ReadWriteMany" ]
   resources:
     requests:
       storage: 1Gi
