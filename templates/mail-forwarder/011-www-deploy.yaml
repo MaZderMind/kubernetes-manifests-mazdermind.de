@@ -40,11 +40,13 @@ spec:
         - name: TLS_VERIFY
           value: encrypt
 
+        {% set relay = ['Privat', 'NetCup', 'kube', namespace, 'relay'] | keepass('url') %}
+        {% set parts = relay.split(':') %}
         - name: EXT_RELAY_PORT
-          value: '587'
+          value: '{{ parts[1] }}'
 
         - name: EXT_RELAY_HOST
-          value: mail.your-server.de
+          value: {{ parts[0] }}
 
         - name: RELAY_HOST_NAME
           value: forwarder.mail-forwarder.kube
