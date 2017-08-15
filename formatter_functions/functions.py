@@ -58,11 +58,8 @@ def keepass_lookup(path):
 
 	return entry
 
-def keepass_username_filter(path):
-	return keepass_lookup(path).username
-
-def keepass_password_filter(path):
-	return keepass_lookup(path).password
+def keepass_filter(path, attribute):
+	return getattr(keepass_lookup(path), attribute)
 
 def keepass_group_filter(path):
 	keepass = _open_keepass()
@@ -81,6 +78,5 @@ def register(jinja2_env):
 	jinja2_env.filters['base64'] = base64_filter
 	jinja2_env.globals['keepass'] = keepass_lookup
 
-	jinja2_env.filters['keepass_username'] = keepass_username_filter
-	jinja2_env.filters['keepass_password'] = keepass_password_filter
+	jinja2_env.filters['keepass'] = keepass_filter
 	jinja2_env.filters['keepass_group'] = keepass_group_filter
