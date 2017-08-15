@@ -4,7 +4,7 @@ metadata:
   labels:
     app: wekan
   name: wekan
-  namespace: todo
+  namespace: {{ namespace }}
 spec:
   replicas: 1
   revisionHistoryLimit: 0

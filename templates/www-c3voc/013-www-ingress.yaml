@@ -4,7 +4,7 @@ metadata:
   labels:
     app: www
   name: www
-  namespace: www-c3voc
+  namespace: {{ namespace }}
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:

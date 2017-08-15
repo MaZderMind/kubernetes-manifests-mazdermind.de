@@ -4,7 +4,7 @@ metadata:
   name: echo
   labels:
     app: echo
-  namespace: echo
+  namespace: {{ namespace }}
 spec:
   ports:
     - name: echo

@@ -4,7 +4,7 @@ metadata:
   labels:
     app: forwarder
   name: www
-  namespace: mail-forwarder
+  namespace: {{ namespace }}
 spec:
   replicas: 1
   revisionHistoryLimit: 0

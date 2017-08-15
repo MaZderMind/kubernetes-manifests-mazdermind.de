@@ -4,7 +4,7 @@ metadata:
   name: mysql
   labels:
     app: mysql
-  namespace: osm-replicate-sequences
+  namespace: {{ namespace }}
 spec:
   accessModes: [ "ReadWriteOnce" ]
   resources:

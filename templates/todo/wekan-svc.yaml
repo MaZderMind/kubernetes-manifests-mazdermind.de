@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: wekan
-  namespace: todo
+  namespace: {{ namespace }}
 spec:
   ports:
     - name: www

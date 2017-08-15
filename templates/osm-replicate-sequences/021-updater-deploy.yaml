@@ -4,7 +4,7 @@ metadata:
   labels:
     app: updater
   name: updater
-  namespace: osm-replicate-sequences
+  namespace: {{ namespace }}
 spec:
   replicas: 1
   revisionHistoryLimit: 0

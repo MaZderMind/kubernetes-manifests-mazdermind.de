@@ -4,7 +4,7 @@ metadata:
   labels:
     app: redirector
   name: redirector
-  namespace: www
+  namespace: {{ namespace }}
 spec:
   replicas: 1
   revisionHistoryLimit: 0

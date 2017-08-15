@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: mongodb
-  namespace: todo
+  namespace: {{ namespace }}
 spec:
   ports:
     - name: mongodb

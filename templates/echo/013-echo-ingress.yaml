@@ -4,7 +4,7 @@ metadata:
   labels:
     app: echo
   name: echo
-  namespace: echo
+  namespace: {{ namespace }}
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:

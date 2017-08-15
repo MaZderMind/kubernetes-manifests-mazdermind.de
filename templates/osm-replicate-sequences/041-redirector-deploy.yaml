@@ -4,7 +4,7 @@ metadata:
   labels:
     app: redirector
   name: redirector
-  namespace: osm-replicate-sequences
+  namespace: {{ namespace }}
 spec:
   replicas: 1
   revisionHistoryLimit: 0

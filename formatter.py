@@ -11,19 +11,31 @@ def format_recursive(template_folder, output_folder):
 	for root, subdirs, files in os.walk(template_folder):
 		yaml_files = filter(is_yaml_filename, files)
 		relative_root = os.path.relpath(root, template_folder)
-		namespace = re.sub(r"[^a-zA-Z0-9\-\_]", "_", relative_root)
-		if namespace == '_':
-			namespace = 'default'
-
 		os.makedirs(os.path.join(output_folder, relative_root), exist_ok=True)
+
 		for yaml_file in yaml_files:
 			format_file(
 				os.path.join(root, yaml_file),
-				os.path.join(output_folder, relative_root, yaml_file),
-				context = {'namespace': namespace})
+				os.path.join(output_folder, relative_root, yaml_file))
 
-def format_file(template_file, output_file, context = {}):
+def format_file(template_file, output_file):
 	print("formatting {} -> {}".format(template_file, output_file))
+
+	dirname = os.path.dirname(output_file)
+	_, last_dir = os.path.split(dirname)
+
+	namespace = re.sub(r"[^a-zA-Z0-9\-\_]", "_", last_dir)
+	if namespace == '_':
+		namespace = 'default'
+
+	with open(template_file, 'r', encoding='UTF-8') as template_handle:
+		with open(output_file, 'w', encoding='UTF-8') as output_handle:
+			template = Template(template_handle.read())
+
+			rendered_template = template.render(
+				namespace=namespace)
+
+			output_handle.write(rendered_template)
 
 
 if __name__ == '__main__':

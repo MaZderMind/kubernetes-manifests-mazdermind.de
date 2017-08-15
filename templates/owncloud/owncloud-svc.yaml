@@ -4,7 +4,7 @@ metadata:
   name: owncloud
   labels:
     app: owncloud
-  namespace: owncloud
+  namespace: {{ namespace }}
 spec:
   ports:
     - name: www

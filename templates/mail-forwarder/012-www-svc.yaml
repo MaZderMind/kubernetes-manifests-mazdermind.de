@@ -4,7 +4,7 @@ metadata:
   name: forwarder
   labels:
     app: forwarder
-  namespace: mail-forwarder
+  namespace: {{ namespace }}
 spec:
   ports:
     - name: forwarder

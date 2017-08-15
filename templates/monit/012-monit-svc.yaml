@@ -4,7 +4,7 @@ metadata:
   name: monit
   labels:
     app: monit
-  namespace: monit
+  namespace: {{ namespace }}
 spec:
   ports:
     - name: monit

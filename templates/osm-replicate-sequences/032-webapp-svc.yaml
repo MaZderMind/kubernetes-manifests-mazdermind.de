@@ -4,7 +4,7 @@ metadata:
   name: webapp
   labels:
     app: webapp
-  namespace: osm-replicate-sequences
+  namespace: {{ namespace }}
 spec:
   ports:
     - name: web

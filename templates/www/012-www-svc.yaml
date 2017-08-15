@@ -4,7 +4,7 @@ metadata:
   name: www
   labels:
     app: www
-  namespace: www
+  namespace: {{ namespace }}
 spec:
   ports:
     - name: www

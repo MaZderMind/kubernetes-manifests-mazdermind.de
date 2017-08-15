@@ -4,7 +4,7 @@ metadata:
   name: data
   labels:
     app: data
-  namespace: owncloud
+  namespace: {{ namespace }}
 spec:
   accessModes: [ "ReadWriteOnce" ]
   resources:

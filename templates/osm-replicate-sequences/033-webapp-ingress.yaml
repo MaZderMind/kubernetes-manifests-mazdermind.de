@@ -4,7 +4,7 @@ metadata:
   labels:
     app: webapp
   name: webapp
-  namespace: osm-replicate-sequences
+  namespace: {{ namespace }}
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:

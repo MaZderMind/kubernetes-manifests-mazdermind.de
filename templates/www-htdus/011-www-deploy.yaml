@@ -4,7 +4,7 @@ metadata:
   labels:
     app: www
   name: www
-  namespace: www-htdus
+  namespace: {{ namespace }}
 spec:
   replicas: 1
   revisionHistoryLimit: 0
