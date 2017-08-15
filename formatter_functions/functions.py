@@ -40,12 +40,12 @@ def _open_keepass():
 			filename = None
 
 	if not filename:
-		filename = input('Enter PAth to .kdbx-File: ')
+		filename = input('Enter Path to .kdbx-File: ')
 		with open('.keepass-file', 'w') as keepass_file:
 			keepass_file.write(filename)
 
 	if not password:
-		password = getpass.getpass()
+		password = getpass.getpass('Password for {}: '.format(filename))
 
 	return PyKeePass(filename, password)
 
