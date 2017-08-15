@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 
 import jinja2
 import formatter_functions.functions
@@ -54,6 +55,10 @@ if __name__ == '__main__':
 		raise RuntimeException("input-file/folder {} does not exist".format(args.input))
 
 	if os.path.isdir(args.input):
+		if os.path.exists(args.output):
+			print("removing output-folder {}".format(args.output))
+			shutil.rmtree(args.output)
+
 		os.makedirs(args.output, exist_ok=True)
 		format_recursive(args.input, args.output)
 	else:
