@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: www
+  labels:
+    app: www
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: www
+      port: 80
+      protocol: TCP
+  selector:
+    app: www

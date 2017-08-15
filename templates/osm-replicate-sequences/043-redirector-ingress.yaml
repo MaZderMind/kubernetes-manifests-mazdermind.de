@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: redirector
+  name: redirector
+  namespace: {{ namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: osm.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: redirector
+          servicePort: web

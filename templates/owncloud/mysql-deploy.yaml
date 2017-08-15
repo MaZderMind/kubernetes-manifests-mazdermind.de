@@ -1,0 +1,57 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: owncloud
+              key: db_root_pass
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: owncloud
+              key: db_user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: owncloud
+              key: db_pass
+
+        - name: MYSQL_DATABASE
+          value: oc
+
+        ports:
+        - containerPort: 3306
+          name: mysql
+          protocol: TCP
+
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: mysql
+
+      volumes:
+      - name: mysql
+        persistentVolumeClaim:
+          claimName: mysql

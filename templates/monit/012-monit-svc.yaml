@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: monit
+  labels:
+    app: monit
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: monit
+      port: 2812
+      protocol: TCP
+
+    - name: check-receiver
+      port: 8080
+      protocol: TCP
+
+  selector:
+    app: monit

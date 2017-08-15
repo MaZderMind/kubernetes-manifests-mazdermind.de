@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: echo
+  name: echo
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: echo
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: echo
+    spec:
+      containers:
+      - name: echo
+        image: solsson/http-echo:latest
+        ports:
+        - containerPort: 80
+          name: echo
+          protocol: TCP

@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: wekan
+  name: wekan
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: wekan
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wekan
+    spec:
+      containers:
+      - name: wekan
+        image: wekanteam/wekan:latest
+        env:
+          - name: MONGO_URL
+            value: mongodb://mongodb/wekan
+
+          - name: ROOT_URL
+            value: https://todo.mazdermind.de
+
+          - name: MAIL_URL
+            value: smtp://forwarder.mail-forwarder:25/
+
+          - name: MAIL_FROM
+            value: net@mazdermind.de

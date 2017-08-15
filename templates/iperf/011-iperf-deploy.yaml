@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: iperf
+  name: iperf
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: iperf
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: iperf
+    spec:
+      hostNetwork: true
+      containers:
+      - name: iperf
+        image: inercia/iperf
+        command: ['/usr/bin/iperf', '-Vs', '-p5001']

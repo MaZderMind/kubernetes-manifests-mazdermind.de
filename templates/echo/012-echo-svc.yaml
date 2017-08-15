@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: echo
+  labels:
+    app: echo
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: echo
+      port: 80
+      protocol: TCP
+  selector:
+    app: echo

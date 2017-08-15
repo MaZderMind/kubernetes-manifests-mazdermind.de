@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: monit
+  name: monit
+  namespace: {{ namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/auth-type: basic
+    ingress.kubernetes.io/auth-secret: secrets
+spec:
+  rules:
+  - host: monit.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: monit
+          servicePort: monit
+
+  - host: check.monit.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: monit
+          servicePort: check-receiver

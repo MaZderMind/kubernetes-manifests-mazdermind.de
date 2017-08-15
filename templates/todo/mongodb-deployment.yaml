@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: mongodb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:3.2.11
+        command: ['mongod', '--smallfiles', '--oplogSize', '128']
+
+        volumeMounts:
+        - mountPath: /data/db
+          name: data
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: mongodb

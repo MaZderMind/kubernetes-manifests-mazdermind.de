@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: wekan
+  name: wekan
+  namespace: {{ namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: todo.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: wekan
+          servicePort: www

@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: wekan
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: www
+      port: 80
+      protocol: TCP
+  selector:
+    app: wekan
