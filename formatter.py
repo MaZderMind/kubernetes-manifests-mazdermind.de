@@ -39,7 +39,7 @@ def format_file(template_file, output_file):
 			rendered_template = template.render(
 				namespace=namespace)
 
-			output_handle.write(rendered_template)
+			output_handle.write(rendered_template+'\n')
 
 
 if __name__ == '__main__':
