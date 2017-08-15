@@ -1,7 +1,11 @@
 import os
 import re
 
-from jinja2 import Template
+import jinja2
+import formatter_functions.functions
+
+jinja2_env = jinja2.Environment()
+formatter_functions.functions.register(jinja2_env)
 
 def is_yaml_filename(filename):
 	base, ext = os.path.splitext(filename)
@@ -30,7 +34,7 @@ def format_file(template_file, output_file):
 
 	with open(template_file, 'r', encoding='UTF-8') as template_handle:
 		with open(output_file, 'w', encoding='UTF-8') as output_handle:
-			template = Template(template_handle.read())
+			template = jinja2_env.from_string(template_handle.read())
 
 			rendered_template = template.render(
 				namespace=namespace)
