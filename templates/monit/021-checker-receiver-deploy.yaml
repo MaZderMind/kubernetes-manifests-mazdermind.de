@@ -26,10 +26,6 @@ spec:
         - mountPath: /var/check-receiver/status-files/
           name: monit-state
 
-        volumeMounts:
-        - mountPath: /state
-          name: monit-state
-
       volumes:
       - name: monit-state
         persistentVolumeClaim:
