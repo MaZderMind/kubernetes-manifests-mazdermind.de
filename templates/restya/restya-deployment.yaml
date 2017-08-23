@@ -40,18 +40,9 @@ spec:
         - name: DB_NAME
           value: restya
 
+        - name: SMTP_RELAYHOST
+          value: forwarder.mail-forwarder.svc.cluster.local
 
-        - name: SMTP_SERVER
-          value: forwarder.mail-forwarder
-
-        - name: SMTP_PORT
-          value: "25"
-
-        - name: SMTP_USERNAME
-          value: ""
-
-        - name: SMTP_PASSWORD
-          value: ""
 
         - name: TZ
           value: "Europe/Berlin"
