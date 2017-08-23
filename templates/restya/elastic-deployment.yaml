@@ -21,6 +21,9 @@ spec:
       containers:
       - name: elastic
         image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
+        env:
+        - name: "ES_JAVA_OPTS"
+          value: "-Xms512m -Xmx512m"
 
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
