@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: restya
-        image: viossat/restyaboard
+        image: mazdermind/docker-restyaboard
         env:
         - name: DB_HOST
           value: postgres
