@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: forwarder
-  name: www
+  name: postfix
   namespace: {{ namespace }}
 spec:
   replicas: 1
@@ -39,6 +39,9 @@ spec:
 
         - name: TLS_VERIFY
           value: encrypt
+
+        - name: RELAY_FORCE_SENDER
+          value: 'net@mazdermind.de'
 
         {% set relay = ['Privat', 'NetCup', 'kube', namespace, 'relay'] | keepass('url') %}
         {% set parts = relay.split(':') %}
