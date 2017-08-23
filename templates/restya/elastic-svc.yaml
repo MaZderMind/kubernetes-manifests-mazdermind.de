@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: elastic
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: elastic
+      port: 9200
+      protocol: TCP
+  selector:
+    app: elastic

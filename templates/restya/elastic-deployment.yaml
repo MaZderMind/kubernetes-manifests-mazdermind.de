@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: elastic
+  name: elastic
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: elastic
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: elastic
+    spec:
+      containers:
+      - name: elastic
+        image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
+
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: data
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: elastic-data

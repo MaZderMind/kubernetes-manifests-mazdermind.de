@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:9.6
+
+        env:
+        - name: POSTGRES_DB
+          value: restya
+
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: restya
+              key: postgres_user
+
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: restya
+              key: postgres_pass
+
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: data
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: postgres-data

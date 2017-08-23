@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: restya
+  name: restya
+  namespace: {{ namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: restya.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: restya
+          servicePort: www
