@@ -1,0 +1,72 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ejabberd
+  name: ejabberd
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: ejabberd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ejabberd
+    spec:
+      hostNetwork: true
+      containers:
+      - name: ejabberd
+        image: mazdermind/docker-ejabberd
+        env:
+        - name: TZ
+          value: 'Europe/Berlin'
+
+        - name: XMPP_DOMAIN
+          value: 'mazdermind.de'
+
+        - name: EJABBERD_SSLCERT_HOST_PATH
+          value: '/var/certs/mazdermind.de/fullchain /var/certs/mazdermind.de/privkey'
+
+        - name: EJABBERD_SSLCERT_MAZDERMIND_DE_PATH
+          value: '/var/certs/mazdermind.de/fullchain /var/certs/mazdermind.de/privkey'
+
+        - name: EJABBERD_SSLCERT_RELOAD_ON_CHANGE
+          value: 'true'
+
+        - name: ERLANG_NODE
+          value: ejabberd
+
+        volumeMounts:
+        - mountPath: /var/certs/
+          name: cert-store
+
+        - mountPath: /opt/ejabberd/database/
+          name: database
+
+        - mountPath: /opt/ejabberd/backup/
+          name: backup
+
+        - mountPath: /var/upload/
+          name: upload
+
+      volumes:
+      - name: cert-store
+        hostPath:
+          path: /var/kubernetes/certs
+
+      - name: database
+        persistentVolumeClaim:
+          claimName: database
+
+      - name: backup
+        persistentVolumeClaim:
+          claimName: backup
+
+      - name: upload
+        persistentVolumeClaim:
+          claimName: upload
