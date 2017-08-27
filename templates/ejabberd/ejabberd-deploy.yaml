@@ -38,12 +38,18 @@ spec:
         - name: EJABBERD_SSLCERT_RELOAD_ON_CHANGE
           value: 'true'
 
+        - name: EJABBERD_DHPARAM
+          value: 'true'
+
         - name: ERLANG_NODE
           value: ejabberd
 
         volumeMounts:
         - mountPath: /var/certs/
           name: cert-store
+
+        - mountPath: /opt/ejabberd/ssl/
+          name: ssl
 
         - mountPath: /opt/ejabberd/database/
           name: database
@@ -58,6 +64,10 @@ spec:
       - name: cert-store
         hostPath:
           path: /var/kubernetes/certs
+
+      - name: ssl
+        persistentVolumeClaim:
+          claimName: ssl
 
       - name: database
         persistentVolumeClaim:
