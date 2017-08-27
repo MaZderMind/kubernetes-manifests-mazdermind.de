@@ -41,6 +41,12 @@ spec:
         - name: EJABBERD_DHPARAM
           value: 'true'
 
+        - name: EJABBERD_HTTPS
+          value: 'false'
+
+        - name: EJABBERD_ADMINS
+          value: 'mazdermind@mazdermind.de'
+
         - name: ERLANG_NODE
           value: ejabberd
 

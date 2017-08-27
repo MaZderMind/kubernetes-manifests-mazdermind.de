@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ejabberd
+  labels:
+    app: ejabberd
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: ejabberd
+      port: 5280
+      protocol: TCP
+  selector:
+    app: ejabberd

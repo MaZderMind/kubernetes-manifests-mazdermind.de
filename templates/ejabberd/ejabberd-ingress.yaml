@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: ejabberd
+  name: ejabberd
+  namespace: {{ namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: jabber.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: ejabberd
+          servicePort: ejabberd
