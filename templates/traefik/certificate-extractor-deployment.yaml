@@ -1,0 +1,42 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: traefik-certificate-extractor
+  namespace: kube-system
+  labels:
+    k8s-app: traefik-certificate-extractor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: traefik-certificate-extractor
+  template:
+    metadata:
+      labels:
+        k8s-app: traefik-certificate-extractor
+    spec:
+      containers:
+      - image: mazdermind/traefik-certificate-extractor
+        name: traefik-certificate-extractor
+        command:
+        - "/traefik-certificate-extractor"
+        - "-acmejson=/var/acmejson/acme.json"
+        - "-target=/var/certs/"
+        - "-watch"
+
+        volumeMounts:
+        - mountPath: /var/acmejson/
+          name: traefic-acme-store
+
+        - mountPath: /var/certs/
+          name: cert-store
+
+      volumes:
+      - name: traefic-acme-store
+        persistentVolumeClaim:
+          claimName: traefic-acme-store
+
+      - name: cert-store
+        hostPath:
+          # directory location on host
+          path: /var/kubernetes/certs
