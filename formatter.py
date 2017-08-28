@@ -14,6 +14,9 @@ def is_yaml_filename(filename):
 
 def format_recursive(template_folder, output_folder):
 	for root, subdirs, files in os.walk(template_folder):
+		if root.endswith('.disabled'):
+			continue
+
 		yaml_files = filter(is_yaml_filename, files)
 		relative_root = os.path.relpath(root, template_folder)
 		os.makedirs(os.path.join(output_folder, relative_root), exist_ok=True)
