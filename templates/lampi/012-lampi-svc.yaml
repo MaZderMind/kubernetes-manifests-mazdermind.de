@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: lampi
+  labels:
+    app: lampi
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: www
+      port: 5000
+      protocol: TCP
+  selector:
+    app: lampi

@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: lampi
+  name: lampi
+  namespace: {{ namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: lampi.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: lampi
+          servicePort: www
