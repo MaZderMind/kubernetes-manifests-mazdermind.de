@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: tommi2day/mysql4
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: root
+
+        volumeMounts:
+        - mountPath: /db
+          name: mysql
+
+      volumes:
+      - name: mysql
+        persistentVolumeClaim:
+          claimName: mysql

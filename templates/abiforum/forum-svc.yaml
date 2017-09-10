@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: forum
+  labels:
+    app: forum
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: www
+      port: 80
+      protocol: TCP
+  selector:
+    app: forum

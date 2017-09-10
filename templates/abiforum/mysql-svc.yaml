@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: db
+  labels:
+    app: db
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: mysql
+      port: 3306
+      protocol: TCP
+  selector:
+    app: mysql

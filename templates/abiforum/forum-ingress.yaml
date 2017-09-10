@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: forum
+  name: forum
+  namespace: {{ namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/auth-type: basic
+    ingress.kubernetes.io/auth-secret: secrets
+spec:
+  rules:
+  - host: abiforum.mazdermind.de
+    http:
+      paths:
+      - backend:
+          serviceName: forum
+          servicePort: www
